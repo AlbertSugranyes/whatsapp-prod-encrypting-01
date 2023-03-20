@@ -15,19 +15,19 @@ public class Encrypter {
 
     private final int[] widths;
     private final String fileName;
-    private final int[] piFieldIndexes;
-    BufferedWriter writer;
+    private final int[] piFieldsIndexes;
+    private BufferedWriter writer;
 
 
     public Encrypter(int[] widths, String fileName, int[] piFieldIndexes) {
         this.widths = widths;
         this.fileName = fileName;
-        this.piFieldIndexes = piFieldIndexes;
+        this.piFieldsIndexes = piFieldIndexes;
     }
 
     public void encrypt() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("files/" + fileName))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/" + fileName))) {
             writer = new BufferedWriter(new FileWriter("Encrypted files/" + fileName));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -76,7 +76,7 @@ public class Encrypter {
 
     private boolean isPersonalData(int position) {
 
-        for (int piFieldIndex : this.piFieldIndexes) {
+        for (int piFieldIndex : this.piFieldsIndexes) {
             if (piFieldIndex == position) {
                 return true;
             }
